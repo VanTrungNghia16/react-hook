@@ -1,9 +1,11 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.scss";
+import Nav from './views/Nav.js';
 
-function App() {
+const App = () => {
   return (
     <div className="App">
+      <Nav />
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <h1>Hello world with react hook</h1>
