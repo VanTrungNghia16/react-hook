@@ -4,6 +4,7 @@ import "./App.scss";
 import Nav from "./views/Nav.js";
 import Todo from "./views/Todo.js";
 import Covid from "./views/Covid.js";
+import { CountDown, NewCountDown } from "./views/Countdown.js";
 
 const App = () => {
   let [name, setName] = useState("Neil"); // => Set varible name = 'Neil'
@@ -36,13 +37,14 @@ const App = () => {
     currentTodo = currentTodo.filter((item) => item.id !== id);
     setTodos(currentTodo);
   };
+  const onTimesup = () => {
+    alert("Times up");
+  };
 
   // didmount
   useEffect(() => {
     // console.log("run useEffect");
-
-
-  },[address]);
+  }, [address]);
 
   // re-render
   return (
@@ -50,8 +52,12 @@ const App = () => {
       <header className="App-header">
         <Nav />
         <img src={logo} className="App-logo" alt="logo" />
+        <CountDown onTimesup={onTimesup} />
+        <span>-------------------</span>
+        <NewCountDown onTimesup={onTimesup} />
+
         <h1>Hello world with react hook with {name}</h1>
-        
+
         <Covid />
         {/* <Todo
           todos={todos}

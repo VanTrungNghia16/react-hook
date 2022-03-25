@@ -25,8 +25,7 @@ const useFetch = (url) => {
         setIsLoading(false);
         setIsError(false);
       }
-        fetchData();
-        
+      fetchData();
     } catch (e) {
       setIsError(true);
       setIsLoading(false);

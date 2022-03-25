@@ -3,16 +3,18 @@ import useFetch from "../customize/fetch.js";
 import moment from "moment";
 
 const Covid = () => {
-  let date = new Date();
-  let dateCurrent = moment(date).format("YYYY-MM-DD");
-  let dateBefore = moment().subtract(30, "d").format("YYYY-MM-DD");
+  // let date = new Date();
+  // let dateCurrent = moment(date).format("YYYY-MM-DD");
+  // let dateBefore = moment().subtract(30, "d").format("YYYY-MM-DD");
+  const today = new Date(new Date().setHours(0, 0, 0, 0));
+  const priorDate = moment().subtract(31, "days");
 
   const {
     data: dataCovid,
     isLoading,
     isError,
   } = useFetch(
-    `https://api.covid19api.com/country/vietnam?from=${dateBefore}T00%3A00%3A00Z&to=${dateCurrent}T00%3A00%3A00Z"`
+    `https://api.covid19api.com/country/vietnam?from=${priorDate.toISOString()}T00%3A00%3A00Z&to=${today.toISOString()}T00%3A00%3A00Z"`
   );
 
   return (
@@ -47,12 +49,12 @@ const Covid = () => {
             })}
           {isLoading === true && (
             <tr>
-              <td colspan="5">Loading...</td>
+              <td colSpan="5">Loading...</td>
             </tr>
           )}
           {isError === true && (
             <tr>
-              <td colspan="5">Something Wrong...</td>
+              <td colSpan="5">Something Wrong...</td>
             </tr>
           )}
         </tbody>
