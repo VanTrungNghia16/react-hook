@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import React from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import logo from "./logo.svg";
 import "./App.scss";
 import Nav from "./views/Nav.js";
@@ -48,37 +50,40 @@ const App = () => {
 
   // re-render
   return (
-    <div className="App">
-      <header className="App-header">
-        <Nav />
-        <img src={logo} className="App-logo" alt="logo" />
-        <CountDown onTimesup={onTimesup} />
-        <span>-------------------</span>
-        <NewCountDown onTimesup={onTimesup} />
+    <Router>
+      <div className="App">
+        <header className="App-header">
+          <Nav />
+          <img src={logo} className="App-logo" alt="logo" />
 
-        <h1>Hello world with react hook with {name}</h1>
-
-        <Covid />
-        {/* <Todo
-          todos={todos}
-          title={"All todos"}
-          deleteDataTodo={deleteDataTodo}
-        />
-        <Todo
-          todos={todos.filter((item) => item.type === "neil")}
-          title={`Neil's todos`}
-          deleteDataTodo={deleteDataTodo}
-        />
-        <input
-          type="text"
-          value={address}
-          onChange={(event) => handleOnChangeInput(event)}
-        />
-        <button type="button" onClick={() => handleClickButton()}>
-          Click me
-        </button> */}
-      </header>
-    </div>
+          <Switch>
+            <Route path="/" exact>
+              <Covid />
+            </Route>
+            <Route path="/timer">
+              <CountDown onTimesup={onTimesup} />
+              <span>-------------------</span>
+              <NewCountDown onTimesup={onTimesup} />
+            </Route>
+            <Route path="/todo">
+              <Todo
+                todos={todos}
+                title={"All todos"}
+                deleteDataTodo={deleteDataTodo}
+              />
+              <input
+                type="text"
+                value={address}
+                onChange={(event) => handleOnChangeInput(event)}
+              />
+              <button type="button" onClick={() => handleClickButton()}>
+                Click me
+              </button>
+            </Route>
+          </Switch>
+        </header>
+      </div>
+    </Router>
   );
 };
 

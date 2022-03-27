@@ -6,15 +6,18 @@ const Covid = () => {
   // let date = new Date();
   // let dateCurrent = moment(date).format("YYYY-MM-DD");
   // let dateBefore = moment().subtract(30, "d").format("YYYY-MM-DD");
-  const today = new Date(new Date().setHours(0, 0, 0, 0));
-  const priorDate = moment().subtract(31, "days");
+  const today = moment().startOf("day").toISOString(true);
+  const priorDate = moment()
+    .startOf("day")
+    .subtract(31, "days")
+    .toISOString(true);
 
   const {
     data: dataCovid,
     isLoading,
     isError,
   } = useFetch(
-    `https://api.covid19api.com/country/vietnam?from=${priorDate.toISOString()}T00%3A00%3A00Z&to=${today.toISOString()}T00%3A00%3A00Z"`
+    `https://api.covid19api.com/country/vietnam?from=${priorDate}T00%3A00%3A00Z&to=${today}T00%3A00%3A00Z"`
   );
 
   return (
